@@ -3,15 +3,14 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { config } from "./config/env";
 import { errorHandler } from "./middlewares/error-handler.middleware";
+import { httpExceptionHandler } from "./middlewares/http-exception-handler.middleware";
 // Import routes here
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.get("/test-error", (req, res) => {
-  throw new Error("Test error");
-});
+app.use(httpExceptionHandler);
 app.use(errorHandler);
 // Use routes here
 
